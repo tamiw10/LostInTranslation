@@ -61,7 +61,14 @@ public class JSONTranslator implements Translator {
                         String languageCode = key;
                         // TODO Task C: record this translation in the appropriate instance variable
 
-                        languageCodes.add(languageCode);
+                        String translatedName = countryData.getString(key); // get translated country name
+                        String translatedKey = countryCode + "-" + languageCode; // create key for translations map
+
+                        translations.put(translatedKey, translatedName); // add key and country name as a key value pair to translations
+
+                        if (!languageCodes.contains(languageCode)) {
+                            languageCodes.add(languageCode);
+                        }
 
                         if (!languages.contains(languageCode)) {
                             languages.add(languageCode);
@@ -78,7 +85,7 @@ public class JSONTranslator implements Translator {
     @Override
     public List<String> getLanguageCodes() {
         // TODO Task C: return a copy of the language codes
-        return new ArrayList<>(languageCodes);
+        return new ArrayList<>(languageCodes); // incorrect
     }
 
     @Override
@@ -89,7 +96,7 @@ public class JSONTranslator implements Translator {
     @Override
     public String translate(String countryCode, String languageCode) {
         // TODO Task C: complete this method using your instance variables as needed
-
-        return "JSONTranslator's translate method is not implemented!";
+        String tk = countryCode + "-" + languageCode;
+        return translations.get(tk);
     }
 }
